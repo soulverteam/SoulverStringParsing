@@ -81,7 +81,7 @@ If Swift is to achieve its goal of becoming the world's greatest string & data p
 As we saw above, finding a data point in a string is as simple as asking for it:
 
 ```swift
-let percent = "Results of likeness test: 83% match".find(.percent)
+let percent = "Results of likeness test: 83% match".find(.percentage)
 // percent is the decimal 0.83
 ```
 
