@@ -1,6 +1,6 @@
 # Introduction to SoulverCore for String Parsing
 
-SoulverCore gives you type-safe, expressive & fast data extraction from Swift strings.
+[SoulverCore](https://soulver.app/core) gives you type-safe, expressive & fast data extraction from Swift strings.
 
 You declaratively request data types from a string, and if there is a match, they are provided to you in a type-safe manner.
 
@@ -114,7 +114,7 @@ Imagine we wanted to standardize the whitespace in the string from the previous 
 
 ```swift
 let standardized = "CREDIT			03/02/2022			Payroll from employer				$200.23".replacingAll(.whitespace) { whitespace in
-	return " "
+    return " "
 }
 
 // standardized is "CREDIT 03/02/2022 Payroll from employer $200.23"
@@ -124,9 +124,7 @@ Or perhaps you want to convert European formatted numbers into Swift "standard" 
 
 ```swift
 let standardized = "10.330,99 8.330,22 330,99".replacingAll(.number, locale: Locale(identifier: "en_DE")) { number in
-
-	return NumberFormatter.localizedString(from: number as NSNumber, number: .decimal)
-
+    return NumberFormatter.localizedString(from: number as NSNumber, number: .decimal)
 }
 
 // standardized is "10,330.99 8,330.22 330.99")
