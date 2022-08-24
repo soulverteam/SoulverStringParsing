@@ -15,24 +15,23 @@ This approach to data parsing allows you to ignore:
 Let's look at a few examples:
 
 ```swift
-let data = "Executed 4 tests, with 1 failure in 0.009 seconds".(number, .number, .time)
-data.0 // 4
-data.1 // 1
-data.2 // 0.009 seconds
-```
+let (testCount, failureCount, timeTaken) = "Executed 4 tests, with 1 failure in 0.009 seconds".find(.number, .number, .time)!
 
-```swift
-let data = "On August 23, 2022 the temperature in Chicago was 68.3 °F (with a humidity of 74%)".find(.date, .temperature, .percentage)
-data.0 // August 23, 2022
-data.1 // 68.3 °F
-data.2 // 74%
-```
+testCount // 4
+failureCount // 1
+timeTaken // 0.009 seconds
 
-```swift
-let data = "Total Earnings From PDF: $12.2k (3.25 MB, at https://lifeadvice.co.uk/pdfs/download?id=guide)".(currency, .fileSize, .url)
-data.0 // 12,200 USD
-data.1 // 3.25 MB
-data.2 // https://lifeadvice.co.uk/pdfs/download?id=guide
+let (date, temperature, humidity) = "On August 23, 2022 the temperature in Chicago was 68.3 ºF (with a humidity of 74%)".find(.date, .temperature, .percentage)!
+
+date // August 23, 2022
+temperature // 68.3 ºF
+humidity // 74%
+
+let (earnings, fileSize, url) = "Total Earnings From PDF: $12.2k (3.25 MB, at https://lifeadvice.co.uk/pdfs/download?id=guide)".find(.currency, .fileSize, .url)!
+
+earnings // 12,200 USD
+fileSize // 3.25 MB
+url // https://lifeadvice.co.uk/pdfs/download?id=guide
 ```
 
 **Note**: the returned data points are **not** strings. They are native Swift data types (available as elements on a tuple), on which you can immediately perform operations:
@@ -108,9 +107,9 @@ Extracting multiple data points is no harder. A tuple is returned with the corre
 
 ```swift
 let payrollEntry = "CREDIT			03/02/2022			Payroll from employer				$200.23" // this string has inconsistent whitespace between entities, but this isn't a problem for us
-let data = payrollEntry.find(.date, .currency)!
-data.0 // Either February 3, or March 2, depending on your system locale
-data.1 // UnitExpression object (use .value to get the decimalValue, and .unit.identifier to get the currency code - USD)
+let (date, currency) = payrollEntry.find(.date, .currency)!
+date // Either February 3, or March 2, depending on your system locale
+currency // UnitExpression object (use .value to get the decimalValue, and .unit.identifier to get the currency code - USD)
 ```
 
 ## Extracting a data point from an array of strings

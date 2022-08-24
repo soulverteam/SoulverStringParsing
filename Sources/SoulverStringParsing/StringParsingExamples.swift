@@ -8,8 +8,9 @@ public struct RunStringParsingExamples {
     
     public static func main() {
         
+        self.runExamples()
         self.runBasicPercentageParse()
-        self.testEmailParse()
+        self.runEmailParse()
         self.runPayrollParse()
         self.runDataParseAndReduceFromArray()
         self.runWhitespaceStandardization()
@@ -20,6 +21,27 @@ public struct RunStringParsingExamples {
         
     }
     
+    static func runExamples() {
+        
+        let (testCount, failureCount, timeTaken) = "Executed 4 tests, with 1 failure in 0.009 seconds".find(.number, .number, .time)!
+
+        print(testCount) // 4
+        print(failureCount) // 1
+        print(timeTaken) // 0.009 seconds
+
+        let (date, temperature, humidity) = "On August 23, 2022 the temperature in Chicago was 68.3 ºF (with a humidity of 74%)".find(.date, .temperature, .percentage)!
+        print(date) // August 23, 2022
+        print(temperature) // 68.3 ºF
+        print(humidity) // 74%
+        
+        let (earnings, fileSize, url) = "Total Earnings From PDF: $12.2k (3.25 MB, at https://lifeadvice.co.uk/pdfs/download?id=guide)".find(.currency, .fileSize, .url)!
+        print(earnings) // 12,200 USD
+        print(fileSize) // 3.25 MB
+        print(url) // https://lifeadvice.co.uk/pdfs/download?id=guide
+
+        
+    }
+    
     static func runBasicPercentageParse() {
         
         let percentage = "Results of likeness test: 83% match".find(.percentage)!
@@ -27,7 +49,7 @@ public struct RunStringParsingExamples {
                 
     }
     
-    static func testEmailParse() {
+    static func runEmailParse() {
         
         let email = "Email me at scott@tracyisland.com".find(.emailAddress)!
         print(email)
@@ -38,10 +60,10 @@ public struct RunStringParsingExamples {
         
         // this string has inconsistent whitespace between entities, but this isn't a problem for us
         let payrollEntry = "CREDIT            03/02/2022            Payroll from employer                $200.23"
-        let data = payrollEntry.find(.date, .currency)!
+        let (date, currency) = payrollEntry.find(.date, .currency)!
         
-        print(data.0) // Either February 3, or March 2, depending on your system locale
-        print(data.1) // UnitExpression object (use .value to get the decimalValue, and .unit.identifier to get the currency code)
+        print(date) // Either February 3, or March 2, depending on your system locale
+        print(currency) // UnitExpression object (use .value to get the decimalValue, and .unit.identifier to get the currency code)
         
     }
     
