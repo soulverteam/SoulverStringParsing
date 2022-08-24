@@ -1,5 +1,5 @@
 ## String Parsing with Soulver Core
-###### A declarative & type-safe approach to parsing data from strings
+##### A declarative & type-safe approach to parsing data from strings
 
 [SoulverCore](https://soulver.app/core) gives you human-friendly, type-safe & performant data parsing from Swift strings.
 
@@ -83,10 +83,11 @@ Where possible, standard Swift primitives are returned (URL, Date, Decimal, etc)
 | .timespan |  3 hours 12 minutes | SoulverCore.Timespan |
 | .laptime |  01:30:22.490 (hh:mm:ss.ms) | SoulverCore.Laptime |
 | .timecode |  03:10:21:16 (hh:mm:ss:frames) | SoulverCore.Frametime |
+| .pitch  | A4, Bb7, C#9 | SoulverCore.Pitch |
 | .url | https://soulver.app | URL |
+| .emailAddress | bob@hotmail.com | String |
 | .hashTag |  #this_is_a_tag | String |
 | .whitespace |  All whitespace characters (including tabs) are collapsed into a single whitespace token | String |
-| .pitch  | A4, Bb7, C#9 | SoulverCore.Pitch |
 
 ## Getting started
 
@@ -243,9 +244,9 @@ extension DataPoint {
 ```
 
 
-## Using SoulverCore as a parser inside Swift Regex Builder (Xcode 14, Swift 5.7+)
+## Using SoulverCore as a parser inside Swift Regex Builder (coming in 5.7)
 
-SoulverCore can be used to parse data inside the Swift regex builder DSL. This is often easier than figuring out how to match the format of your data with a regular expression.
+SoulverCore will be able to be used to parse data inside the Swift regex builder DSL coming in 5.7. This is often easier than figuring out how to match the format of your data with a regular expression.
 
 ```swift
 if #available(macOS 13.0, iOS 16.0, *) {

@@ -1,30 +1,40 @@
 import SoulverCore
-import RegexBuilder
+
+/// Requires Swift 5.7
+// import RegexBuilder
 
 @main
 public struct RunStringParsingExamples {
     
     public static func main() {
         
-        self.runBasicPercentageExtraction()
-        self.runPayrollExtraction()
-        self.runDataExtractionAndReduceFromArray()
+        self.runBasicPercentageParse()
+        self.testEmailParse()
+        self.runPayrollParse()
+        self.runDataParseAndReduceFromArray()
         self.runWhitespaceStandardization()
         self.runNumberFormatStandardization()
         self.runTemperatureStringArrayConversion()
         self.runCustomTypeParsingExample()
-        self.runRegexBuildingExample()
+        // self.runRegexBuildingExample()
         
     }
     
-    static func runBasicPercentageExtraction() {
+    static func runBasicPercentageParse() {
         
-        let percent = "Results of likeness test: 83% match".find(.percentage)!
-        print(percent)
-        
+        let percentage = "Results of likeness test: 83% match".find(.percentage)!
+        print(percentage)
+                
     }
     
-    static func runPayrollExtraction() {
+    static func testEmailParse() {
+        
+        let email = "Email me at scott@tracyisland.com".find(.emailAddress)!
+        print(email)
+
+    }
+    
+    static func runPayrollParse() {
         
         // this string has inconsistent whitespace between entities, but this isn't a problem for us
         let payrollEntry = "CREDIT            03/02/2022            Payroll from employer                $200.23"
@@ -35,9 +45,9 @@ public struct RunStringParsingExamples {
         
     }
     
-    static func runDataExtractionAndReduceFromArray() {
+    static func runDataParseAndReduceFromArray() {
         
-        let amounts = ["Zac spent $50", "Molly spent US$81.9 (with her 10% discount)", "Jude spent $43.90 USD"].find(.currency)
+        let amounts = ["Jude spent $50", "Sasha spent US$81.9 (with her 10% discount)", "Theodore spent $43.90 USD"].find(.currency)
         
         let totalAmount = amounts.reduce(0.0) {
             $0 + $1.value
@@ -95,34 +105,34 @@ public struct RunStringParsingExamples {
         
     }
     
-    
-    static func runRegexBuildingExample() {
-        
-        let input = "Cost: 365.45, Date: March 12, 2022"
-        
-        if #available(macOS 13.0, iOS 16.0, *) {
-            
-            let regex = Regex {
-                "Cost: "
-                Capture {
-                    DataPoint<NumberFromTokenParser>.number
-                }
-                ", Date: "
-                Capture {
-                    DataPoint<DateFromTokenParser>.date
-                }
-            }
-            
-            guard let match = input.wholeMatch(of: regex) else {
-                return
-            }
-            
-            print(match.1)
-            print(match.2)
-            
-        }
-        
-    }
+    /// Requires Swift 5.7
+    // static func runRegexBuildingExample() {
+//
+//         let input = "Cost: 365.45, Date: March 12, 2022"
+//
+//         if #available(macOS 13.0, iOS 16.0, *) {
+//
+//             let regex = Regex {
+//                 "Cost: "
+//                 Capture {
+//                     DataPoint<NumberFromTokenParser>.number
+//                 }
+//                 ", Date: "
+//                 Capture {
+//                     DataPoint<DateFromTokenParser>.date
+//                 }
+//             }
+//
+//             guard let match = input.wholeMatch(of: regex) else {
+//                 return
+//             }
+//
+//             print(match.1)
+//             print(match.2)
+//
+//         }
+//
+//     }
     
 }
 
