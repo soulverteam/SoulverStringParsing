@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "SoulverStringParsing",
+    platforms: [.macOS(.v10_15), .iOS(.v13)],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/soulverteam/SoulverCore", branch: "master"),
@@ -14,9 +15,6 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .executableTarget(
             name: "SoulverStringParsing",
-            dependencies: ["SoulverCore"]),
-        .testTarget(
-            name: "SoulverStringParsingTests",
-            dependencies: ["SoulverStringParsing"]),
+            dependencies: ["SoulverCore"])        
     ]
 )
