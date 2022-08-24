@@ -274,7 +274,7 @@ Until this is fixed, you must explicitly specify the DataFromTokenParser corresp
 
 SoulverCore is unlikely to be your app's bottleneck.
 
-In our testing SoulverCore does ~6k operations per second on Intel and 10k+ operations/second on  Silicon. 
+In our testing SoulverCore does ~6k operations/second on Intel and 10k+ operations/second on  Silicon. 
 
 While this is admittedly not as fast as regex, in fairness, SoulverCore is doing a **lot** more work. Before your query is checked for matches, SoulverCore parses the complete string into tokens representing various data types, of which it can identify more than 20 (including dates, numbers & units in various formats, places, timezones and more…).
 
@@ -282,17 +282,17 @@ A regex that did this would be impossible to construct, and even if such a regex
 
 ## Comparison with other data parsing approaches
 
-In addition to regex, Apple's toolkit for string parsing includes Regex, NSScanner & NSDataDetector. Let's compare and contrast each of these with SoulverCore.
+Apple's toolkit for string parsing includes Regex, NSScanner & NSDataDetector. Let's compare and contrast each of these with SoulverCore.
 
 #### Regular Expressions
 
-(Regular expressions)[https://en.wikipedia.org/wiki/Regular_expression] will always be with us, but ask yourself, do you _really_ want to use them for data processing?
+[Regular expressions](https://en.wikipedia.org/wiki/Regular_expression) will always be with us, but ask yourself, do you _really_ want to use them for data processing?
 
 They're non-trivial to understand at a glance, and constructing a correct regex to match data is, at the minimum, tedious (if not mentally quite _challenging_ sometimes).
 
-Even with the **significant** enhancements to regex in Swift 5.7 (type-safe tuple matches & the regex builder syntax), regex makes you think about data parsing at the *wrong level of abstraction* (i.e. characters, rather than data types).
-
 Regex only "sees" sets of characters/numbers/whitespace so it forces you to think about the string format of the data you want to parse, and also often about how to skip past other strings leading up to it.
+
+So even with the **significant** enhancements to regex in Swift 5.7 (type-safe tuple matches & the regex builder syntax), regex makes you think about data parsing at the *wrong level of abstraction* (i.e. characters, rather than data types).
 
 If Swift is to achieve its goal of becoming [the world's greatest string & data processing language](https://github.com/apple/swift/blob/main/docs/StringManifesto.md), it needs something more human friendly at the level of abstraction of data, not character sets.
 
