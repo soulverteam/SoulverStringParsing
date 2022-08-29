@@ -120,7 +120,7 @@ We can also call find with a single data type on an array of strings, and get ba
 let amounts = ["Zac spent $50", "Molly spent US$81.9 (with her 10% discount)", "Jude spent $43.90 USD"].find(.currency)
 
 let totalAmount = amounts.reduce(0.0) {
-	$0 + $1.value
+    $0 + $1.value
 }
 
 // totalAmount is $175.80
